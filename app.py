@@ -80,7 +80,8 @@ if st.session_state.show_main == True:
         col1, col2 = st.columns(2)
 
         with col1:
-            category = st.selectbox("Select category", ["🎲 Random", "🤝🏽 Behavior", "🤔 Guesstimation", "🎨 Product Design", "🚀 Product Strategy"])
+            # category = st.selectbox("Select category", ["🎲 Random", "🤝🏽 Behavior", "🤔 Guesstimation", "🎨 Product Design", "🚀 Product Strategy"])
+            category = st.selectbox("Select category", ["🤝🏽 Behavior"])
             st.session_state.category = category
             if st.button("Generate question"):
                 st.session_state.show_columns = False
