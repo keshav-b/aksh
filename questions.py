@@ -142,12 +142,8 @@ def save():
 
 
 def choose_question():
-    
     rand = random.randint(2,21)
-    
-
     row = worksheet_list[1].row_values(21)
-
     st.session_state.session_question = row[1]
     rubric = row[2]
     return st.session_state.session_question, rubric
