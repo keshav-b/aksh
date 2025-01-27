@@ -101,7 +101,7 @@ if st.session_state.feedback_generated==False:
                 
         if  st.session_state.generate_clicked:
             st.divider()
-            question, st.session_state.session_rubric = choose_question(st.session_state.category)
+            question, st.session_state.session_rubric = choose_question()
             st.header(question)
             st.divider()
             col1, col2, col3 = st.columns(3)
@@ -112,7 +112,7 @@ if st.session_state.feedback_generated==False:
             with col3:
                 pass
             st.caption("Whenever you are ready, click on the mic to record your answer. You're awesome you don't need luck!")
-            st.caption("Once you are done, clikc on the mic again and I'll save the recording!")
+            st.caption("Once you are done, click on the mic again and I'll save the recording!")
 
         
 

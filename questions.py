@@ -19,8 +19,10 @@ creds = Credentials.from_service_account_info(credentials,scopes=scopes)
 client = gspread.authorize(creds)
 
 
-sheet_id = "1FUBuFHUQ-Lq6aJy9YgN41jh_HwEbJAJylflUfdI1TOo"
-sheet = client.open_by_key(sheet_id)
+
+sheet = client.open_by_key(st.secrets.sheet_id)
+worksheet_list = sheet.worksheets()
+
 
 
 
@@ -102,54 +104,53 @@ def save():
 
 
 
-secrets = {
-            "🤝🏽 Behavior" : 
-            {
-                    "questions": [["Describe a difficult interaction you had with a customer.", # Customer Obsession
-                                "Give me an example of when you asked for customer feedback.",
-                                "Tell me about a time when you had to balance the needs of the customer with the needs of the business.",
-                                "Tell me about a time when you went above and beyond for a customer.",
-                                "Tell me about a time when you had to deal with a very difficult customer."
-                                ],
-                                ["Tell me about a time when you solved a complex problem.", #Dive Deep
-                                 "Walk me through a bog problem or issue in your org that you helped solve.",
-                                 "Tell me time you worked on an analytical problem",
-                                 "Tell me about a time when you thought of diverse perspectives to solve a problem",
-                                 "Tell me about a time when you were able to make a decision without having much data metrics in hand."
-                                ],
-                                ["Tell me about a time when you had to get a buy-in.", #Deliver results
-                                 "Give me an example of a tough or critical piece of feedback you received.",
-                                 "Tell me about a time when you had communicate bad/ dissapointing news to your peers/ team.",
-                                 "Tell me about a time when you influenced a peer/ or your manager."
-                                 "Tell me about a time when you influenced a peer/ or your manager."
-                                ],
-                                ["Tell me about a time you made a bold and difficult decision.", #Ownership
-                                 "Describe a tough situation in which you had to step into a leadership role.",
-                                 "Tell me about a tough decision you made during a project. ",
-                                 "Tell me about a time when you took on something significantly outside your area of responsibility",
-                                 "Describe a time when you didn't think you were going to meet a commitment you promised"
-                                ]
-                                ],
-                    "rubric": ["The candidate did not do a good job if its the following: - Makes decisions or takes actions without adequately considering the customer impact - Fails to collect or respond to customer input appropriately - Fails to meet customer commitments - Loses and doesn't regain customers' trust - Develops a project approach based on industry trends rather than customer needs - Unable to identify primary customers \n \n The candidate did a good job if its the following:- Takes actions guided by customer input- Works backwards from the optimal customer experience- Tries to surprise and delight the customer- Applies time and energy to make the customer experience more efficient or enjoyable- Identifies new ways of gathering feedback from customer- Listens to feedback from customers and uses it to make improvements- Pushes back when necessary to ensure that decisions consider what is best for customer in the long-term- Earns customers trust by delivering promised services and products which meet or exceed expectation- Stops activities that no longer enhance the customer experience",
-                               "The candidate did not do a good job if its the following: - Does not understand the details of projects- Does not understand how different groups or Systems work together - Only holds surface-level understanding of metrics and data - Does not question assumptions - Unable to step in and get work done \n\nThe candidate did a good job if its the following: - Stays connected to the details of projects and programs - Understands how different groups or systems work together - Critically evaluates metrics and data - Asks good questions that provide clarity to situations - Steps in and gets work done - Investigates and get details in order to solve a problem - Gathers information to solve a problem, even if it's difficult or time-consuming",
-                               "The candidate did not do a good job if its the following: - Fails to treat others and their ideas with respect - Blames others for mistakes - Denies or covers up mistakes - Publicly criticizes or humiliates others \n\nThe candidate did a good job if its the following: - Builds positive working relationships by treating others and their ideas with respect - Seeks out and accepts feedback for self or team - Takes responsibility for shortfalls - Openly acknowledges mistakes - Provides feedback to others in a respectful manner - Represents data and information entirely transparently - Honors commitments and makes good on promises"
-                               "The candidate did not do a good job if its the following: - Makes decisions for short-term team success rather than long-term value- Describes setbacks or problems without talking about how to address them- Relies on others to remove roadblocks- Avoids tough decisions- Avoids addressing problems that are in others' work areas- Blames others for setbacks- Assigns work to others because the work is undesirable- Walks away if there are too many difficulties Creates solutions that negatively impact other teams \n \n The candidate did a good job if its the following: -Actively makes improvements outside of one's area of responsibility- Makes decisions that consider risks and future outcomes- Makes decisions that are scalable and contribute to long-term success- Takes the lead in solving problems- Takes accountability for dependencies and their work- Takes ownership for mistakes- Accepts responsibility- Inspires others to take ownership- Sees things through to completion"
-                               ]
-            }
-        }
+# secrets = {
+#             "🤝🏽 Behavior" : 
+#             {
+#                     "questions": [["Describe a difficult interaction you had with a customer.", # Customer Obsession
+#                                 "Give me an example of when you asked for customer feedback.",
+#                                 "Tell me about a time when you had to balance the needs of the customer with the needs of the business.",
+#                                 "Tell me about a time when you went above and beyond for a customer.",
+#                                 "Tell me about a time when you had to deal with a very difficult customer."
+#                                 ],
+#                                 ["Tell me about a time when you solved a complex problem.", #Dive Deep
+#                                  "Walk me through a bog problem or issue in your org that you helped solve.",
+#                                  "Tell me time you worked on an analytical problem",
+#                                  "Tell me about a time when you thought of diverse perspectives to solve a problem",
+#                                  "Tell me about a time when you were able to make a decision without having much data metrics in hand."
+#                                 ],
+#                                 ["Tell me about a time when you had to get a buy-in.", #Deliver results
+#                                  "Give me an example of a tough or critical piece of feedback you received.",
+#                                  "Tell me about a time when you had communicate bad/ dissapointing news to your peers/ team.",
+#                                  "Tell me about a time when you influenced a peer/ or your manager."
+#                                  "Tell me about a time when you influenced a peer/ or your manager."
+#                                 ],
+#                                 ["Tell me about a time you made a bold and difficult decision.", #Ownership
+#                                  "Describe a tough situation in which you had to step into a leadership role.",
+#                                  "Tell me about a tough decision you made during a project. ",
+#                                  "Tell me about a time when you took on something significantly outside your area of responsibility",
+#                                  "Describe a time when you didn't think you were going to meet a commitment you promised"
+#                                 ]
+#                                 ],
+#                     "rubric": ["The candidate did not do a good job if its the following: - Makes decisions or takes actions without adequately considering the customer impact - Fails to collect or respond to customer input appropriately - Fails to meet customer commitments - Loses and doesn't regain customers' trust - Develops a project approach based on industry trends rather than customer needs - Unable to identify primary customers \n \n The candidate did a good job if its the following:- Takes actions guided by customer input- Works backwards from the optimal customer experience- Tries to surprise and delight the customer- Applies time and energy to make the customer experience more efficient or enjoyable- Identifies new ways of gathering feedback from customer- Listens to feedback from customers and uses it to make improvements- Pushes back when necessary to ensure that decisions consider what is best for customer in the long-term- Earns customers trust by delivering promised services and products which meet or exceed expectation- Stops activities that no longer enhance the customer experience",
+#                                "The candidate did not do a good job if its the following: - Does not understand the details of projects- Does not understand how different groups or Systems work together - Only holds surface-level understanding of metrics and data - Does not question assumptions - Unable to step in and get work done \n\nThe candidate did a good job if its the following: - Stays connected to the details of projects and programs - Understands how different groups or systems work together - Critically evaluates metrics and data - Asks good questions that provide clarity to situations - Steps in and gets work done - Investigates and get details in order to solve a problem - Gathers information to solve a problem, even if it's difficult or time-consuming",
+#                                "The candidate did not do a good job if its the following: - Fails to treat others and their ideas with respect - Blames others for mistakes - Denies or covers up mistakes - Publicly criticizes or humiliates others \n\nThe candidate did a good job if its the following: - Builds positive working relationships by treating others and their ideas with respect - Seeks out and accepts feedback for self or team - Takes responsibility for shortfalls - Openly acknowledges mistakes - Provides feedback to others in a respectful manner - Represents data and information entirely transparently - Honors commitments and makes good on promises"
+#                                "The candidate did not do a good job if its the following: - Makes decisions for short-term team success rather than long-term value- Describes setbacks or problems without talking about how to address them- Relies on others to remove roadblocks- Avoids tough decisions- Avoids addressing problems that are in others' work areas- Blames others for setbacks- Assigns work to others because the work is undesirable- Walks away if there are too many difficulties Creates solutions that negatively impact other teams \n \n The candidate did a good job if its the following: -Actively makes improvements outside of one's area of responsibility- Makes decisions that consider risks and future outcomes- Makes decisions that are scalable and contribute to long-term success- Takes the lead in solving problems- Takes accountability for dependencies and their work- Takes ownership for mistakes- Accepts responsibility- Inspires others to take ownership- Sees things through to completion"
+#                                ]
+#             }
+#         }
 
 
-def choose_question(category):
+def choose_question():
     
-    # rand = random.randint(0,2)
-    # rand2 = random.randint(0,3)
-    rand = 1
-    rand2 = 0
-    question = secrets[category]['questions'][rand][rand2]
-    rubric = secrets[category]['rubric'][rand]
+    rand = random.randint(2,21)
     
-    st.session_state.session_question = question
-    return question, rubric
+
+    row = worksheet_list[1].row_values(21)
+
+    st.session_state.session_question = row[1]
+    rubric = row[2]
+    return st.session_state.session_question, rubric
 
 
 
