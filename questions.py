@@ -141,13 +141,14 @@ def speech2text():
 
 
 def check_answer():
+    content = "f"+st.secrets.content
     completion = client.chat.completions.create(
     model="gpt-4o-mini",
     messages=[
         {"role": "system", "content": st.secrets.system_prompt},
         {
             "role": "user",
-            "content": f"Question: {st.session_state.session_question} \n Candidate's answer: {st.session_state.session_answer} \n Rubric: {st.session_state.session_rubric}"
+            "content": content
         }
     ]
     )
