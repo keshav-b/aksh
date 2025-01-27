@@ -10,6 +10,10 @@ if 'show_main' not in st.session_state:
 
 st.session_state.user_email = None
 
+
+
+if 'question_done' not in st.session_state:
+    st.session_state.question_done = False
 if 'login_code' not in st.session_state:
     st.session_state.login_code = None
 
@@ -101,8 +105,10 @@ if st.session_state.feedback_generated==False:
                 
         if  st.session_state.generate_clicked:
             st.divider()
-            question, st.session_state.session_rubric = choose_question()
-            st.header(question)
+            if st.session_state.question_done == False:
+                question, st.session_state.session_rubric = choose_question()
+                st.session_state.question_done = True
+            st.header(st.session_state.session_question)
             st.divider()
             col1, col2, col3 = st.columns(3)
             with col1:
